@@ -1,4 +1,3 @@
-
 import {
   Table,
   TableHeader,
@@ -18,12 +17,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Search, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
-
-interface Column {
-  header: string;
-  accessor: string;
-  cell?: (row: any) => React.ReactNode;
-}
+import { Column } from "@/types/datatable";
 
 interface DataTableProps {
   columns: Column[];
@@ -42,7 +36,6 @@ const DataTable = ({
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage, setPerPage] = useState(10);
   
-  // Filter data based on search
   const filteredData = searchable 
     ? data.filter(item => 
         Object.values(item).some(
@@ -53,7 +46,6 @@ const DataTable = ({
       )
     : data;
   
-  // Pagination
   const totalPages = Math.ceil(filteredData.length / perPage);
   const startIndex = (currentPage - 1) * perPage;
   const paginatedData = pagination 
