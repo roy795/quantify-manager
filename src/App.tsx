@@ -20,9 +20,9 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <DataProvider>
       <TooltipProvider>
-        <Toaster />
-        <Sonner />
         <BrowserRouter>
+          <Toaster />
+          <Sonner />
           <div className="flex flex-col min-h-screen bg-background">
             <main className="flex-1">
               <Routes>

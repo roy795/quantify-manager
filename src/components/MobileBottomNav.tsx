@@ -7,14 +7,28 @@ import {
   ShoppingCart, 
   FileText, 
   Factory, 
-  Menu 
+  Menu,
+  BarChart2,
+  Users
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const MobileBottomNav = () => {
-  const location = useLocation();
+  // Wrap the useLocation in a try/catch to handle the case when it's rendered outside a Router
+  let pathname = "/";
+  try {
+    const location = useLocation();
+    pathname = location.pathname;
+  } catch (error) {
+    console.error("MobileBottomNav rendered outside Router context:", error);
+  }
+  
   const [open, setOpen] = useState(false);
+  const isMobile = useIsMobile();
+  
+  if (!isMobile) return null;
   
   const routes = [
     {
@@ -48,25 +62,25 @@ const MobileBottomNav = () => {
     {
       name: "Analytics",
       path: "/analytics",
-      icon: <LayoutDashboard className="h-5 w-5" />,
+      icon: <BarChart2 className="h-5 w-5" />,
     },
     {
       name: "Customers",
       path: "/customers",
-      icon: <LayoutDashboard className="h-5 w-5" />,
+      icon: <Users className="h-5 w-5" />,
     },
   ];
   
-  const isActive = (path: string) => location.pathname === path;
+  const isActive = (path: string) => pathname === path;
   
   return (
     <>
-      <div className="mobile-bottom-nav">
+      <div className="fixed bottom-0 left-0 right-0 z-50 bg-background border-t border-border flex justify-between items-center px-2">
         {routes.slice(0, 4).map((route) => (
           <Link
             key={route.path}
             to={route.path}
-            className={`flex flex-col items-center justify-center py-1 ${
+            className={`flex flex-col items-center justify-center py-1 px-2 ${
               isActive(route.path)
                 ? "text-primary"
                 : "text-muted-foreground"
