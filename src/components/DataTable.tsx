@@ -1,3 +1,4 @@
+
 import {
   Table,
   TableHeader,
@@ -117,7 +118,7 @@ const DataTable = ({
               <SelectTrigger className="w-16">
                 <SelectValue placeholder={perPage.toString()} />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-background">
                 <SelectItem value="5">5</SelectItem>
                 <SelectItem value="10">10</SelectItem>
                 <SelectItem value="25">25</SelectItem>

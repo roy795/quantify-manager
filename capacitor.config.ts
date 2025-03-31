@@ -11,11 +11,11 @@ const config: CapacitorConfig = {
   },
   android: {
     buildOptions: {
-      keystorePath: null,
-      keystorePassword: null,
-      keystoreAlias: null,
-      keystoreAliasPassword: null,
-      signingType: null,
+      keystorePath: undefined,
+      keystorePassword: undefined,
+      keystoreAlias: undefined,
+      keystoreAliasPassword: undefined,
+      signingType: undefined,
     }
   }
 };

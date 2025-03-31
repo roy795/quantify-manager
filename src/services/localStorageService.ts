@@ -21,86 +21,140 @@ const STORAGE_KEYS = {
 
 // Get all materials
 export const getMaterials = async (): Promise<Material[]> => {
-  const { value } = await Storage.get({ key: STORAGE_KEYS.MATERIALS });
-  return value ? JSON.parse(value) : [];
+  try {
+    const { value } = await Storage.get({ key: STORAGE_KEYS.MATERIALS });
+    return value ? JSON.parse(value) : [];
+  } catch (error) {
+    console.error('Error getting materials:', error);
+    return [];
+  }
 };
 
 // Save materials
 export const saveMaterials = async (materials: Material[]): Promise<void> => {
-  await Storage.set({
-    key: STORAGE_KEYS.MATERIALS,
-    value: JSON.stringify(materials)
-  });
+  try {
+    await Storage.set({
+      key: STORAGE_KEYS.MATERIALS,
+      value: JSON.stringify(materials)
+    });
+  } catch (error) {
+    console.error('Error saving materials:', error);
+  }
 };
 
 // Get all sales
 export const getSales = async (): Promise<Sale[]> => {
-  const { value } = await Storage.get({ key: STORAGE_KEYS.SALES });
-  return value ? JSON.parse(value) : [];
+  try {
+    const { value } = await Storage.get({ key: STORAGE_KEYS.SALES });
+    return value ? JSON.parse(value) : [];
+  } catch (error) {
+    console.error('Error getting sales:', error);
+    return [];
+  }
 };
 
 // Save sales
 export const saveSales = async (sales: Sale[]): Promise<void> => {
-  await Storage.set({
-    key: STORAGE_KEYS.SALES,
-    value: JSON.stringify(sales)
-  });
+  try {
+    await Storage.set({
+      key: STORAGE_KEYS.SALES,
+      value: JSON.stringify(sales)
+    });
+  } catch (error) {
+    console.error('Error saving sales:', error);
+  }
 };
 
 // Get all BOQs
 export const getBOQs = async (): Promise<BOQ[]> => {
-  const { value } = await Storage.get({ key: STORAGE_KEYS.BOQS });
-  return value ? JSON.parse(value) : [];
+  try {
+    const { value } = await Storage.get({ key: STORAGE_KEYS.BOQS });
+    return value ? JSON.parse(value) : [];
+  } catch (error) {
+    console.error('Error getting BOQs:', error);
+    return [];
+  }
 };
 
 // Save BOQs
 export const saveBOQs = async (boqs: BOQ[]): Promise<void> => {
-  await Storage.set({
-    key: STORAGE_KEYS.BOQS,
-    value: JSON.stringify(boqs)
-  });
+  try {
+    await Storage.set({
+      key: STORAGE_KEYS.BOQS,
+      value: JSON.stringify(boqs)
+    });
+  } catch (error) {
+    console.error('Error saving BOQs:', error);
+  }
 };
 
 // Get all productions
 export const getProductions = async (): Promise<Production[]> => {
-  const { value } = await Storage.get({ key: STORAGE_KEYS.PRODUCTIONS });
-  return value ? JSON.parse(value) : [];
+  try {
+    const { value } = await Storage.get({ key: STORAGE_KEYS.PRODUCTIONS });
+    return value ? JSON.parse(value) : [];
+  } catch (error) {
+    console.error('Error getting productions:', error);
+    return [];
+  }
 };
 
 // Save productions
 export const saveProductions = async (productions: Production[]): Promise<void> => {
-  await Storage.set({
-    key: STORAGE_KEYS.PRODUCTIONS,
-    value: JSON.stringify(productions)
-  });
+  try {
+    await Storage.set({
+      key: STORAGE_KEYS.PRODUCTIONS,
+      value: JSON.stringify(productions)
+    });
+  } catch (error) {
+    console.error('Error saving productions:', error);
+  }
 };
 
 // Get all stock movements
 export const getStockMovements = async (): Promise<StockMovement[]> => {
-  const { value } = await Storage.get({ key: STORAGE_KEYS.STOCK_MOVEMENTS });
-  return value ? JSON.parse(value) : [];
+  try {
+    const { value } = await Storage.get({ key: STORAGE_KEYS.STOCK_MOVEMENTS });
+    return value ? JSON.parse(value) : [];
+  } catch (error) {
+    console.error('Error getting stock movements:', error);
+    return [];
+  }
 };
 
 // Save stock movements
 export const saveStockMovements = async (stockMovements: StockMovement[]): Promise<void> => {
-  await Storage.set({
-    key: STORAGE_KEYS.STOCK_MOVEMENTS,
-    value: JSON.stringify(stockMovements)
-  });
+  try {
+    await Storage.set({
+      key: STORAGE_KEYS.STOCK_MOVEMENTS,
+      value: JSON.stringify(stockMovements)
+    });
+  } catch (error) {
+    console.error('Error saving stock movements:', error);
+  }
 };
 
 // Get all customers
 export const getCustomers = async (): Promise<Customer[]> => {
-  const { value } = await Storage.get({ key: STORAGE_KEYS.CUSTOMERS });
-  return value ? JSON.parse(value) : [];
+  try {
+    const { value } = await Storage.get({ key: STORAGE_KEYS.CUSTOMERS });
+    return value ? JSON.parse(value) : [];
+  } catch (error) {
+    console.error('Error getting customers:', error);
+    return [];
+  }
 };
 
 // Save customers
 export const saveCustomers = async (customers: Customer[]): Promise<void> => {
-  await Storage.set({
-    key: STORAGE_KEYS.CUSTOMERS,
-    value: JSON.stringify(customers)
-  });
+  try {
+    await Storage.set({
+      key: STORAGE_KEYS.CUSTOMERS,
+      value: JSON.stringify(customers)
+    });
+  } catch (error) {
+    console.error('Error saving customers:', error);
+  }
 };
 
 // Initialize storage with mock data
@@ -112,15 +166,19 @@ export const initializeStorage = async (
   stockMovements: StockMovement[], 
   customers: Customer[]
 ): Promise<void> => {
-  const materialsExists = await Storage.get({ key: STORAGE_KEYS.MATERIALS });
-  
-  if (!materialsExists.value) {
-    await saveMaterials(materials);
-    await saveSales(sales);
-    await saveBOQs(boqs);
-    await saveProductions(productions);
-    await saveStockMovements(stockMovements);
-    await saveCustomers(customers);
-    console.log('Local storage initialized with mock data');
+  try {
+    const materialsExists = await Storage.get({ key: STORAGE_KEYS.MATERIALS });
+    
+    if (!materialsExists.value) {
+      await saveMaterials(materials);
+      await saveSales(sales);
+      await saveBOQs(boqs);
+      await saveProductions(productions);
+      await saveStockMovements(stockMovements);
+      await saveCustomers(customers);
+      console.log('Local storage initialized with mock data');
+    }
+  } catch (error) {
+    console.error('Error initializing storage:', error);
   }
 };
